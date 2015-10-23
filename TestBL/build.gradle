@@ -1,15 +1,38 @@
-group 'co.pablobastidasv'
-version '1.0-SNAPSHOT'
-
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+    }
+}
+apply plugin: 'spring-boot'
 apply plugin: 'java'
-apply plugin: 'war'
+apply plugin: 'eclipse'
 apply plugin: 'idea'
+
+jar {
+    baseName = 'gs-actuator-service'
+    version =  '0.1.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.2.0'
+   
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-jersey")    
+    // AssertJ
+    testCompile("org.assertj:assertj-core:1.7.0")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("junit:junit")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
 }
